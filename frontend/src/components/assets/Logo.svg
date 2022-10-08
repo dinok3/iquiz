@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="52.703" height="50.419" viewBox="0 0 52.703 50.419">
+  <g id="Group_42" data-name="Group 42" transform="translate(0 0)">
+    <g id="Group_40" data-name="Group 40" transform="matrix(0.927, -0.375, 0.375, 0.927, 0, 9.547)">
+      <line id="Line_7" data-name="Line 7" y2="10.798" transform="translate(13.504 29.145)" fill="none" stroke="#263238" stroke-width="1"/>
+      <path id="Path_778" data-name="Path 778" d="M12.874,0c7.037-.064,12.682,6.583,12.609,14.847S19.647,29.864,12.61,29.928-.072,23.345,0,15.081,5.837.065,12.874,0Z" transform="translate(0 0)" fill="#00bfd2"/>
+    </g>
+    <g id="Group_41" data-name="Group 41" transform="translate(29.437 0.428) rotate(21)">
+      <line id="Line_7-2" data-name="Line 7" y2="10.798" transform="translate(13.134 29.145)" fill="none" stroke="#263238" stroke-width="1"/>
+      <path id="Path_779" data-name="Path 779" d="M12.331,0C19.212.065,24.849,6.817,24.92,15.081S19.471,29.993,12.59,29.928.072,23.112,0,14.848,5.45-.064,12.331,0Z" transform="translate(0 0)" fill="#f61960"/>
+    </g>
+    <path id="Path_780" data-name="Path 780" d="M0,0V9" transform="translate(27.372 41.421)" fill="none" stroke="#263238" stroke-width="1"/>
+  </g>
+</svg>

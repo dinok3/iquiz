@@ -1,0 +1,131 @@
+/* login,register*/
+.auth_grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height:100vh;
+}
+.auth_grid .image__container{
+     background-size:cover;
+    background-repeat: no-repeat;
+
+}
+
+.logo-red{
+    color:var(--red);
+}
+
+
+
+/* FORM */
+.auth__form{
+    width: 45%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.submit-auth-btn:focus{
+    outline: none !important;
+    transition: 0.5s transform;
+    transform: translateX(2px);
+}
+.auth__form .btn:focus{
+    outline: 2px solid var(--blue);
+}
+.auth__form input[type="text"],.auth__form input[type="password"]{
+    margin-top: 5px;
+    background-color: inherit;
+    border:1px solid var(--blue);
+}
+.auth__form section{
+    margin:1rem 0;
+    width: 100%;
+}
+
+.auth_grid .auth__container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.auth__container h1{
+    font-size: 1.875rem;
+    margin: 2rem 0;
+}
+
+.auth__form input, .auth__form label{
+    display: block;
+    width: 100%;
+    font-size: 17px;
+}
+.submit-auth-btn{
+    background-color: var(--blue);
+    color:white;
+    border:0;
+    cursor: pointer;
+    margin-top: 1rem;   
+}
+
+
+
+.or__p{
+    margin: 2rem 0;
+}
+.or__p::after,.or__p::before{
+    content: " ";
+    display: inline-block;
+    width: 20px;
+    height: 2px;
+    background-color: var(--black);
+    margin-left: 5px;
+    margin-bottom: 3px;
+}
+
+.or__p::before{
+    margin-right: 5px;
+}
+.oauth__section{
+    width: 45%;
+    margin-bottom: 3rem;
+}
+.oauth__section a,.oauth__section button{
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: fit-content;
+    padding-right: 10px;
+    font-size:17px;
+    cursor: pointer;
+    
+}
+.oauth__section img{
+    width: 2rem;
+    margin-right: 1rem;
+}
+
+.oauth__section .facebook_auth{
+    margin-top: 1rem;
+}
+.form-footer{
+    margin-bottom: 2rem;
+}
+.footer-a{
+    color: var(--blue); 
+}
+
+@media screen and (max-width:1400px){
+    .auth__form{
+        width: 70%; 
+    }
+}
+@media screen and (max-width:700px){
+    .auth_grid{
+        grid-template-columns: 1fr;
+    }
+    .auth_grid .image__container{
+        display: none;
+   }
+}

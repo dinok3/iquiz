@@ -1,0 +1,395 @@
+.container{
+    width: 80%;
+    margin: 0 auto;
+    max-width: 2200px;
+}
+
+.middle-div, .lift-up-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 7rem;
+}
+
+
+.middle-link, .submit-btn {
+    width: 100%;
+    text-align: center;
+    transition: all 300ms;
+}
+.middle-section{
+    width: 100%;
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+}
+.middle-link, .middle-btn, .submit-btn{
+    max-width: 400px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+}
+
+.settings-div{
+    width: 100%;
+    max-width: 400px;
+    position: relative;
+}
+/*CHOICES DIV*/
+
+.selection{
+    width: 100%;
+    max-height: 300px;
+    overflow-y: scroll;
+    border: 1px solid var(--blue);
+    border-radius: 5px;
+    margin-top: 2px;
+    position: absolute;
+    z-index: 10;
+}
+.settings-choice{
+    display: block;
+    width: 100%;
+    height: 40px;
+    background-color: var(--blue);
+    text-align: left;
+    padding-left: 1.2rem;
+    font-size: 16px;
+    border: 0;
+    color: white;
+}
+.settings-choice:hover{
+    cursor: pointer;
+    background-color: var(--dark);
+}
+.flex-div{
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.arrow-svg-div{
+    position: absolute;
+    right: 0;
+    width: 10%;
+    border-radius: 5px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+}
+
+.arrow-svg-div::before{
+  content:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%280,191,210,.99%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
+  margin-top: 5px;
+  margin-right: 10px;
+  transition: transform 0.5s;
+}
+
+.arrow-svg-div[aria-expanded="false"]::before{
+  transform: rotate(90deg);
+}
+.middle-link:hover{
+    background-color: var(--blue);
+    color:white;
+}
+.amount-input{
+  text-align: center;
+  cursor: auto;
+}
+.amount-input:focus{
+  outline: 0;
+}
+
+.show-true{
+    animation: 500ms fadeInOptions forwards;
+}
+.show-false{
+  display: none;
+}
+
+
+
+/*GAME STYLE*/
+.game-container{
+  width: 100%;
+}
+.game-container h1{
+  text-align: center;
+ ;
+}
+.answers-section{
+  margin: 0 auto;
+  max-width: 400px;
+  margin-top: 7rem;
+}
+.answer-choice:hover{
+  background-color: var(--blue);
+  color: white;
+}
+
+.correct_answer{
+  background-color: var(--green);
+  color:white;
+  border:0;
+}
+.correct_answer:hover{
+  background-color:var(--green);
+}
+.wrong_answer{
+  background-color: var(--red);
+  color:white;
+  border:0;
+}
+.wrong_answer:hover{
+  background-color:var(--red);
+}
+.blink-correct{
+   animation: blink 1s  infinite;
+
+}
+@keyframes blink {
+  50% {
+    background-color: var(--green);
+    
+  }
+}
+
+.additional-data{
+  display:flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.additional-data a,.underline{
+  text-decoration: underline;
+}
+
+/*ENDGAME */
+.game-over-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/*CUSTOM*/
+
+
+.room-id-div{
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+}
+.room-id-div input{
+  cursor: auto;
+  width: 60%;
+}
+.room-id-div span{
+  margin: 0 0.4rem;
+  display: inline-block;
+  width: 20%;
+  text-align: center;
+}
+.room-id-div button{
+  background-color: var(--blue);
+  color:white;
+  border: 1px solid var(--blue);
+  border-radius: 5px;
+  padding: 0 8px;
+  height: 40px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.create-room-form{
+  margin: 2rem 0;
+}
+
+.additional-data-small{
+  max-width: 55rem;
+  width: 100%;
+}
+.player{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.lift-up-div{
+  margin-top:-2rem;
+}
+
+.chat-icon{
+  position: fixed;
+  bottom: 4%;
+  right: 3%;
+  cursor: pointer;
+  z-index: 5;
+  transition: 0.2s transform;
+}
+.chat-icon:hover{
+  transform: scale(1.1);
+}
+
+.chat-container{
+  padding: 0 5%;
+}
+.chat{
+  max-width: 350px;
+  width: 100%;
+  height: 450px;
+  border: 1px solid var(--black);
+  position: fixed;
+  bottom: 7.5%;
+  right: 4.5%;
+  z-index: 1;
+  border-radius: 10px;
+  background-color: white;
+}
+.chat-top{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.chat-top img{
+  width: 25px;
+  padding: 0.5rem 0;
+}
+.chat-kick{
+  width: 20px !important;
+  cursor: pointer;
+}
+.chat-messages{
+  height: 72%;
+  overflow-y: scroll;
+}
+.chat-messages .muted{
+  color: #263238;
+  opacity: .75;
+}
+
+.chat-messages .msg{
+  margin: 0.5rem 0;
+  font-size: 16px;
+}
+.send-msg-form{
+  margin: 1rem 0;
+  margin-left: 5%;
+}
+.send-msg-form input[type="text"]{
+  width: 75%;
+  margin-right: 0.5rem;
+  height: 30px;
+  border: 1px solid var(--dark);
+  border-radius: 3px;
+  padding-left: 5px;
+  font-size: 15px;
+}
+.send-msg-form input[type="text"]:focus{
+  outline: none;
+}
+.send-msg-form .btn{
+  padding: 0.2rem 0.5rem;
+  height: 30px;
+  background-color: var(--blue);
+  color:white;
+}
+
+.chat-visible{
+  display: block;
+  animation: showUp forwards 500ms ;
+}
+@keyframes showUp {
+  0%{
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100%{
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+.chat-not-visible{
+  display: none;
+}
+
+
+/*SPIN*/
+
+.spinner,.small-spinner{
+  width: 100px;
+  height: 100px;
+  
+  border-radius: 50%;
+  border: 10px solid var(--black);
+  border-top:10px solid var(--blue);
+  animation: 2s rotate linear infinite;
+}
+.small-spinner{
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border: 3px solid var(--black);
+  border-top:3px solid var(--blue);
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+/*ROUTE TRANSITIONS*/
+
+.fadeIn{
+    animation: 0.5s fadeIn forwards;
+}
+.fadeOut {
+    animation: 0.5s fadeOut forwards;
+}
+
+@keyframes fadeInOptions {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeOutOptions {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  
+  }
+  to {
+    opacity: 1;
+   
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  
+  }
+  to {
+   
+    opacity: 0;
+  }
+}
