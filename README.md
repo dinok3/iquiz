@@ -44,3 +44,5 @@ Setting up frontend:
 cd frontend
 npm start
 ```
+
+![Brief look at the app](https://github.com/dinok3/iquiz/tree/master/iquiz/main/static)
