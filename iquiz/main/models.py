@@ -1,4 +1,5 @@
 
+from email.policy import default
 from django.db import models
 from django.db.models.signals import post_save
 
@@ -30,6 +31,8 @@ class Room(models.Model):
     type = models.CharField(max_length=200,null=True,blank=True)
     time = models.IntegerField(null=True,blank=True)
     rounds = models.IntegerField(null=True,blank=True)
+
+    is_started = models.BooleanField(default=False,null=True)
 
     def __str__(self):
         return f"{self.id}"

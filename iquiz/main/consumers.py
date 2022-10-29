@@ -1,5 +1,6 @@
 
 import json
+from operator import truediv
 
 from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
@@ -62,11 +63,15 @@ class RoomConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         self.room_id = self.scope["url_route"]["kwargs"]["room_id"]
         
+        self.can_join = True
+        
         self.room_name = f"room_{self.room_id}"
+        
         self.user = self.scope["user"]
+        
         room = await self.get_room(self.room_id)
 
-        if room:
+        if room and self.can_join:
             await self.channel_layer.group_add(
                 self.room_name,
                 self.channel_name
@@ -93,9 +98,13 @@ class RoomConsumer(AsyncWebsocketConsumer):
             user = self.user.username
         except:
             user = self.user
+        
         message = text_data_json["message"]
+       
+        print("msg by client: ",message)
         
         command = message.split(" ")
+        
         if "/kickplayer" in command[0]:
             player_to_kick = command[-1]
             user_to_kick = await self.get_user_from_id_or_name(player_to_kick)
@@ -111,6 +120,19 @@ class RoomConsumer(AsyncWebsocketConsumer):
             )
             return
 
+        if message == "/scoreUpdate":
+            score = text_data_json["score"]
+            print(score)
+            await self.channel_layer.group_send(
+                self.room_name,
+                {
+                    "type":"chat_score_update",
+                    "user":user,
+                    "score":score
+                }
+            )
+            return
+
         # Send message to room group
         await self.channel_layer.group_send(
             self.room_name,
@@ -122,16 +144,28 @@ class RoomConsumer(AsyncWebsocketConsumer):
         )
 
 
+
     # Receive message from room group
     async def chat_message(self, event):
         message = event['message']
         user = event["user"]
         
-        if message == "NewUserJoined":
+    
+        if message == "/newuserjoined":
             await self.send(text_data=json.dumps({
                 "message": str(user) + " has joined the server"
             }))
             return
+
+        if message == "/startGame":
+            self.can_join = False
+            await self.send(text_data=json.dumps({
+                "message": "/gameStart",
+            }))
+            return
+
+    
+
         # Send message to WebSocket
         await self.send(text_data=json.dumps({
             'message': message,
@@ -145,6 +179,15 @@ class RoomConsumer(AsyncWebsocketConsumer):
         # Send message to WebSocket
         await self.send(text_data=json.dumps({
             'message': message,
+        }))
+
+    async def chat_score_update(self, event):
+        score = event["score"]
+        user = event["user"]
+        await self.send(text_data=json.dumps({
+            "user":user,
+            "score":score,
+            "message":""
         }))
 
    

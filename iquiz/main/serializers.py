@@ -1,3 +1,4 @@
+import profile
 from rest_framework.serializers import ModelSerializer
 from rest_framework import serializers
 from .models import Profile, Room
@@ -6,6 +7,8 @@ from django.contrib.auth.models import User
 
 class RoomSerializer(ModelSerializer):
     owner = serializers.CharField()
+    profile = serializers.StringRelatedField(many=True)
+
     class Meta:
         model = Room
         fields = "__all__"

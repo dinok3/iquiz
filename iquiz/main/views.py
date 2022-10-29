@@ -50,19 +50,28 @@ def create_room_view(request):
 @api_view(["GET","POST"])
 def room_view(request,id):
     room = Room.objects.get(id=id)
+    
     if request.method == "GET":
         serializer = RoomSerializer(room)
         return Response(serializer.data)
 
     if request.method == "POST":
-        username = request.data["user"]
-        profile = User.objects.get(username=username).profile
+        try:
+            game_started = request.data["is_started"] == "True"
+            room.is_started = game_started
+            room.save()
 
-        if str(request.user) == str(room.owner):
-            room.profile.remove(profile)
-      
-        serializer = RoomSerializer(room)
-        return Response(serializer.data)
+            serializer = RoomSerializer(room)
+            return Response(serializer.data)
+        except:
+            username = request.data["user"]
+            profile = User.objects.get(username=username).profile
+
+            if str(request.user) == str(room.owner):
+                room.profile.remove(profile)
+        
+            serializer = RoomSerializer(room)
+            return Response(serializer.data)
 
 
 @permission_classes([IsAuthenticated])
