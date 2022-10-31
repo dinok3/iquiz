@@ -51,9 +51,15 @@ class RegiserUserView(generics.CreateAPIView):
 
    
 
+
+from oauth2_provider.models import AccessToken as SocialToken
+from rest_framework_simplejwt.tokens  import AccessToken as JWToken
+
+
 @api_view(["GET"])
 @permission_classes((IsAuthenticated, ))
 def get_user(request):
+    print(request.user)
     data = {
         "user":request.user.username
     }
