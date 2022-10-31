@@ -1,6 +1,5 @@
 
 import json
-from operator import truediv
 
 from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
@@ -8,29 +7,11 @@ from django.contrib.auth.models import User,AnonymousUser
 from .models import Room,Profile
 
 
-from oauth2_provider.models import AccessToken as SocialToken
-from rest_framework_simplejwt.tokens  import AccessToken as JWToken
-
 
 from channels.db import database_sync_to_async
 
 @database_sync_to_async
 def get_user(username):
-    """
-    ### one way is to find user with TOKEN
-    
-    try:
-        user_name = JWToken(token)["username"]
-        return User.objects.get(username=user_name)
-   
-    except:
-        try:
-            user_name = SocialToken.objects.get(token=token).user
-            return User.objects.get(username=user_name)
-
-        except:
-            return AnonymousUser
-    """
 
     try:
         return User.objects.get(username=username)
@@ -101,8 +82,7 @@ class RoomConsumer(AsyncWebsocketConsumer):
         
         message = text_data_json["message"]
        
-        print("msg by client: ",message)
-        
+   
         command = message.split(" ")
         
         if "/kickplayer" in command[0]:
@@ -122,10 +102,7 @@ class RoomConsumer(AsyncWebsocketConsumer):
 
         if message == "/scoreUpdate":
             score = text_data_json["score"]
-<<<<<<< HEAD
-=======
-            print(score)
->>>>>>> 227fce7e397df4bafc3182e465c35081e5a36942
+
             await self.channel_layer.group_send(
                 self.room_name,
                 {
@@ -161,7 +138,6 @@ class RoomConsumer(AsyncWebsocketConsumer):
             return
 
         if message == "/startGame":
-            print("start game")
             self.can_join = False
             await self.send(text_data=json.dumps({
                 "message": "/gameStart",
