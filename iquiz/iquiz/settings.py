@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,8 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
-
+SECRET_KEY = 'django-insecure-cb5xaxkm-6_$z3csb53v$4b68iz#-k%e!6vk$r_+cjw!g4jn3@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -224,10 +222,9 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 
-
 # Facebook configuration, shouldnt be in settings in production
-SOCIAL_AUTH_FACEBOOK_KEY = os.environ.get("FACEBOOK_KEY")
-SOCIAL_AUTH_FACEBOOK_SECRET = os.environ.get("FACEBOOK_SECRET")
+SOCIAL_AUTH_FACEBOOK_KEY = '1064747410846315'
+SOCIAL_AUTH_FACEBOOK_SECRET = '655287160d6d917138eda7736bfe6408'
 
 # Define SOCIAL_AUTH_FACEBOOK_SCOPE to get extra permissions from Facebook.
 # Email is not sent by default, to get it, you must request the email permission.
@@ -237,9 +234,10 @@ SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
 }
 
 
+
 # Google configuration
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get("GOOGLE_KEY")
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get("GOOGLE_SECRET")
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY ="1052794811798-m5tm3ubvakq00f7pbt93jram6duvdi43.apps.googleusercontent.com"
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = "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"
 # Define SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE to get extra permissions from Google.
 SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
     'https://www.googleapis.com/auth/userinfo.email',
