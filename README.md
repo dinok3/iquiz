@@ -21,7 +21,6 @@ Quiz app made with Django + React.
 
 
 ## Working on
-* Starting a custom game
 * Adding statistics for each user
 * Deploying it
 
