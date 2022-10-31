@@ -4,7 +4,7 @@
     max-width: 2200px;
 }
 
-.middle-div, .lift-up-div{
+.middle-div{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -224,6 +224,7 @@
 
 .lift-up-div{
   margin-top:-2rem;
+  width: 100%;
 }
 
 .chat-icon{
@@ -306,6 +307,37 @@
   display: block;
   animation: showUp forwards 500ms ;
 }
+
+/*SCOREBOARD*/
+#gameStart{
+  display: grid;
+  grid-template-columns: minmax(0,80%) 300px;
+  gap: 5%;
+}
+.scoreboard-section{
+  border: 1px solid black;
+}
+.scoreboard-section h2{
+  padding: 1.5rem 1rem;
+  background-color: var(--black);
+  text-align: center;
+  color:white;
+}
+.scoreboard-section p{
+  margin: 1.2rem 1rem;
+}
+
+
+@media screen and (max-width:1024px) {
+  #gameStart{
+    grid-template-columns: 1fr;
+  }
+  .scoreboard-section{
+    margin-top: 2rem;
+    margin-bottom: 10%;
+  }
+}
+
 @keyframes showUp {
   0%{
     opacity: 0;

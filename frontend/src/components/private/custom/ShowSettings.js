@@ -1,27 +1,29 @@
-import React,{useEffect,useState} from "react";
+import React,{useEffect,useCallback, useState} from "react";
 import { useNavigate } from "react-router-dom";
 
 
-const ShowPlayers = ({room_id, setRoomOwner})=>{
+const ShowSettings = ({room_id, setRoomOwner,setSettings, settings})=>{
     const navigate = useNavigate()
-    const [settings, setSettings] = useState([])
-
     
+    const fetchSettings = useCallback(async ()=>{
+        await fetch(`http://127.0.0.1:8000/api/room/${room_id}/`)
+        .then(res=>res.json())
+        .then(data=>{
+            setSettings(data)
+            setRoomOwner(data.owner)
+        })
+        .catch(e=>{
+            console.log("error: ",e)
+            navigate("/custom/")
+        })
+    },[navigate, room_id, setRoomOwner,setSettings])
+
+
     useEffect(()=>{
-        const fetchSettings = async()=>{
-            await fetch(`http://127.0.0.1:8000/api/room/${room_id}/`)
-            .then(res=>res.json())
-            .then(data=>{
-                setSettings(data)
-                setRoomOwner(data.owner)
-            })
-            .catch(e=>{
-                console.log("error: ",e)
-                navigate("/custom/")
-            })
-        }
         fetchSettings()
-    },[navigate, room_id, setRoomOwner])
+    },[fetchSettings])
+
+
 
     return (
         <>
@@ -46,4 +48,4 @@ const ShowPlayers = ({room_id, setRoomOwner})=>{
 
 
 
-export default ShowPlayers
+export default ShowSettings

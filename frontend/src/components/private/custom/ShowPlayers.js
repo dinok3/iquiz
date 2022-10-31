@@ -2,7 +2,7 @@ import React,{useEffect,useState} from "react";
 import { useNavigate } from "react-router-dom";
 import Kick from "../../assets/kick.svg"
 
-const ShowPlayers = ({room_id, setKickPlayer})=>{
+const ShowPlayers = ({room_id, setKickPlayer, settings})=>{
     const navigate = useNavigate()
     const [users, setUsers] = useState([])
 
@@ -59,7 +59,8 @@ const ShowPlayers = ({room_id, setKickPlayer})=>{
                 {users.map(user=>{
                     return <p className="mt-1 player" key={user.id}>
                             {user.user}
-                            <img src={Kick} alt="kick" data-user={user.user} className="small-svg" onClick={kickPlayer} />
+                            {(user.user !== settings.owner && localStorage.getItem("user") !== user.user) && 
+                            <img src={Kick} alt="kick" data-user={user.user} className="small-svg" onClick={kickPlayer} />}
                             </p>
                 })}  
             </section>

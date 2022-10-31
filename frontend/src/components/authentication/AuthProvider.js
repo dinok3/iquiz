@@ -126,7 +126,6 @@ export const AuthProvider = ({children})=>{
             })
         }).then(res=>res.json())
         .then(data=>{
-            
             handleJWTResponse(data) 
         })
         .catch(e=>{

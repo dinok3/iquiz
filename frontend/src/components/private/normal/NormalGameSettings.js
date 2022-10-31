@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import { Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 import CategoryChoices from "./CategoryChoices";
 import DifficultyChoices from "./DifficultyChoices";
 import TypeChoices from "./TypeChoices";
-
-import Footer from "../Footer"
-
+import Return from "../../assets/return.svg"
 
 const NormalGameSettings = ({trivia_categories, difficulties, types})=>{
     //toggle show options/choices for specific input
@@ -31,7 +29,11 @@ const NormalGameSettings = ({trivia_categories, difficulties, types})=>{
         <>
         <h1>CHOOSE HOW YOU WANT TO PLAY A GAME!</h1>
         <section className="additional-data mt-1">
-            <Link to="/">Go Back</Link>
+            <span onClick={()=>{navigate(-1)}} style={{cursor:"pointer"}}>
+                <img src={Return} alt="goback-svg" style={{marginRight:"5px"}} />
+                Go Back
+            </span>
+
             <span>NORMAL</span>
         </section>
         <form onSubmit={formSubmit} className="middle-section">
@@ -57,7 +59,6 @@ const NormalGameSettings = ({trivia_categories, difficulties, types})=>{
             <button type="submit" className="btn submit-btn mt-2">Play</button>
         </form>
 
-        <Footer />
         </>
     )
 }

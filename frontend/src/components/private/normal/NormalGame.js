@@ -11,6 +11,16 @@ const NormalGame = ({trivia_categories})=>{
     const navigate = useNavigate()
     const [questions,setQuestions] = useState([])
 
+    const checkIfParamsOK = (params,difficulties, types)=>{
+        return (
+        !(parseInt(params.amount) > 0 && parseInt(params.amount) <= 50) ||
+        (!trivia_categories.find(c => String(c.id) === params.category) && params.category !== "any") ||
+        (!difficulties.includes(params.difficulty) && params.difficulty !== "any") ||
+        (!types.includes(params.type) && params.type !== "any") 
+        )
+    }
+
+
     useEffect(()=>{
         const URL = `https://opentdb.com/api.php?amount=${params.amount}`
         const fetchQuestions = async(URL)=>{
@@ -32,9 +42,7 @@ const NormalGame = ({trivia_categories})=>{
                     if(data.results.length > 0){
                         setQuestions(data.results)
                         setSpin(false)
-                    }
-                    
-
+                    } 
                 })
                 .catch(e=>{
                     console.log(e)
@@ -45,12 +53,7 @@ const NormalGame = ({trivia_categories})=>{
         fetchQuestions(URL)
     }, [params.category, params.difficulty, params.type, params.amount, navigate])
 
-    if(
-        !(parseInt(params.amount) > 0 && parseInt(params.amount) <= 50) ||
-        (!trivia_categories.find(c => String(c.id) === params.category) && params.category !== "any") ||
-        (!difficulties.includes(params.difficulty) && params.difficulty !== "any") ||
-        (!types.includes(params.type) && params.type !== "any") 
-    ){
+    if(checkIfParamsOK(params,difficulties, types)){
         return  (
             <>
             <span className="spinner"></span>
@@ -64,7 +67,7 @@ const NormalGame = ({trivia_categories})=>{
 
     return (
         <>
-            {spin ? <span className="spinner"></span> : <ShowQuestion questions={questions} /> }
+            {spin ? <span className="spinner"></span> : <ShowQuestion questions={questions} normalGame={true} /> }
             
         </>   
     )

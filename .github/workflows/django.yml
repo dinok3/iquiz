@@ -1,0 +1,7 @@
+steps:
+...
+- name: Run Tests
+  env: 
+    SECRET_KEY: 56a82f58d576482a8102615d9b02c091191b1622673a5b76ec
+  run: |
+    python manage.py test

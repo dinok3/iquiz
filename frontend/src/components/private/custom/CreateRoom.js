@@ -1,11 +1,11 @@
 import React, { useState } from "react"
-import { Link, useNavigate } from "react-router-dom" 
+import { useNavigate } from "react-router-dom" 
 
 import CategoryChoices from "../normal/CategoryChoices"
 import DifficultyChoices from "../normal/DifficultyChoices"
 import TypeChoices from "../normal/TypeChoices"
 
-import Footer from "../Footer"
+import Return from "../../assets/return.svg"
 
 
 const CreateRoom = ({trivia_categories, difficulties, types})=>{
@@ -19,7 +19,7 @@ const CreateRoom = ({trivia_categories, difficulties, types})=>{
         var type = e.target.type.value
         var time = e.target.time.value
         var rounds = e.target.rounds.value
-        var owner_token = JSON.parse(localStorage.getItem("authTokens")).access
+        var owner = localStorage.getItem("user")
 
         if(rounds > 50 || time > 60){
             rounds > 50 && setError("Rounds must be less or equal to 50!")
@@ -38,12 +38,11 @@ const CreateRoom = ({trivia_categories, difficulties, types})=>{
                 type:type,
                 time:time,
                 rounds:rounds,
-                owner_token:owner_token
+                owner:owner
             })
         })
         .then(res=>res.json())
         .then(data=>{
-            console.log(data)
             if(data){
                 navigate(`/custom/room/${data.id}`)
             }
@@ -59,7 +58,10 @@ const CreateRoom = ({trivia_categories, difficulties, types})=>{
         <>
         <h1>CREATE A NEW GAME!</h1>
         <section className="additional-data mt-1">
-            <Link to="/">Go Back</Link>
+            <span onClick={()=>{navigate(-1)}} style={{cursor:"pointer"}}>
+                <img src={Return} alt="goback-svg" style={{marginRight:"5px"}} />
+                Go Back
+            </span>
             <span>CUSTOM</span>
         </section>
         <form className="middle-section create-room-form" onSubmit={handleSubmit}>
@@ -85,7 +87,6 @@ const CreateRoom = ({trivia_categories, difficulties, types})=>{
             </div>
             <button type="submit" className="btn submit-btn mt-2">Create</button>
 
-            <Footer />
         </form>
     
 

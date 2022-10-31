@@ -12,7 +12,6 @@ const Home = ()=>{
         //override user that will be set using google and facebook - 
         //they set different username then what is set into a database(will cause issues and complexity)
         const fetchUserWithToken = ()=>{
-            console.log(JSON.parse(localStorage.getItem("authTokens")).access)
             fetch("http://127.0.0.1:8000/api/user/",{
                 method:"GET",
                 headers:{

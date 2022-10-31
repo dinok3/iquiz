@@ -99,7 +99,6 @@ class RoomConsumer(AsyncWebsocketConsumer):
 
         if message == "/scoreUpdate":
             score = text_data_json["score"]
-           
             await self.channel_layer.group_send(
                 self.room_name,
                 {
@@ -135,10 +134,12 @@ class RoomConsumer(AsyncWebsocketConsumer):
             return
 
         if message == "/startGame":
+            print("start game")
             self.can_join = False
             await self.send(text_data=json.dumps({
                 "message": "/gameStart",
             }))
+
             return
 
     
