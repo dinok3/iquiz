@@ -30,14 +30,8 @@ def create_room_view(request):
         return Response(serializer.data)
 
     if request.method == "POST":
-        owner_token = request.data["owner_token"]
-        user = get_user_by_token(owner_token)
-        user_profile = Profile.objects.get(user=user)
 
-        new_data = request.data
-        new_data["owner"] = user_profile.id
-      
-        serializer = RoomSerializer(data=new_data)
+        serializer = RoomSerializer(data=request.data)
        
         if serializer.is_valid():
             serializer.save()

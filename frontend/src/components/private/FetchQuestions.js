@@ -1,29 +1,45 @@
+const categoryNameToId = async (category) =>{
+    var response = await fetch("https://opentdb.com/api_category.php")
+    .then(res=>res.json())
+    .then(data=>{
+        return data["trivia_categories"]
+    })
 
+    return response.find(element => element.name === category).id
+}
 
 
 const fetchQuestions = async (URL, params, setQuestions, setSpin, navigate, shouldNavigate)=>{
+    /*
+    shouldNavigate = true -> normal game
+    shouldNavigate = false -> custom game
 
-    var category = params.category
+    */
+    var category = ""
+
+    if(shouldNavigate){
+        category = params.category
+    }else{
+        category = await categoryNameToId(params.category)
+    }
+    
     var difficulty = params.difficulty.toLowerCase()
     var type = params.type.toLowerCase()
 
-
     if(category !== "any"){
-        URL += `&category = ${category}`
+        URL += `&category=${category}`
     }
     if(difficulty !== "any"){
-        URL += `&difficulty = ${difficulty}`
+        URL += `&difficulty=${difficulty}`
     }
 
     if(type !== "any"){
         if(params.type === "Multiple Choices"){
-            URL += `&type = multiple`
+            URL += `&type=multiple`
         }
         else if (params.type === "True/False"){
-            URL += `&type = boolean`
+            URL += `&type=boolean`
         }
-    }else{
-        URL += `&type = any`
     }
     
 
