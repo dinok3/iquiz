@@ -25,14 +25,18 @@ Quiz app made with Django + React.
 * Deploying it
 
 ## Installation
+- Django & React are managed independently so you should set the up separately
+
 Setting up backend:
 ------------------
 ```
 python -m venv venv
+venv/scripts/activate
 git clone https://github.com/dinok3/iquiz.git
 cd iquiz
+cd iquiz
+*python -m pip install --upgrade pip* - if needed (can't install requirements.txt)
 pip install -r requirements.txt
-py manage.py makemigrations
 py manage.py migrate
 py manage.py runserver
 ```
@@ -41,6 +45,7 @@ Setting up frontend:
 ------------------
 ```
 cd frontend
+npm install
 npm start
 ```
 
