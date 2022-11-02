@@ -25,7 +25,7 @@ Quiz app made with Django + React.
 * Deploying it
 
 ## Installation
-- Django & React are managed independently so you should set the up separately
+- Django & React are managed independently so you should set them up separately
 
 Setting up backend:
 ------------------
