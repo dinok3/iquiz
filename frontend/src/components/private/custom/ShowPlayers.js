@@ -9,24 +9,40 @@ const ShowPlayers = ({room_id, setKickPlayer, settings})=>{
 
     useEffect(()=>{
         const activeUsers = async () =>{
-            await fetch(`http://127.0.0.1:8000/api/room_users/${room_id}/`)
+            const response = await fetch(`http://127.0.0.1:8000/api/room_users/${room_id}/`)
            .then(res =>res.json())
            .then(data=>{
                 setUsers(data)
+                return data
             })
            .catch(e=>{
                 navigate("/custom/")
            })
+           return response
           
        }
        
         //updating users when they join
         var interval = setInterval(activeUsers,2000)
+
         return () => clearInterval(interval)
             
     },[room_id, navigate, setUsers])
 
 
+    useEffect(()=>{
+        /*
+        When users are set - kick the user that is not in the list
+        */
+        if(users.length > 0){
+            var findUser = users.find(e => e.user === localStorage.getItem("user"))
+            if(!findUser){
+                navigate("/custom/")
+            }
+        }
+    },[users, navigate])
+
+    
     const kickPlayer = async (e)=>{
         const user = e.target.dataset.user
         await fetch(`http://127.0.0.1:8000/api/room/${room_id}/`,{
@@ -39,12 +55,14 @@ const ShowPlayers = ({room_id, setKickPlayer, settings})=>{
                 "user" : user
             })
         })
-        .then(res=>res.json())
-        .then(data=>{
-           setKickPlayer(user)
+        .then(res=>{
+            if(res.ok){
+                setKickPlayer(user)
+            }
         })
+       
         .catch(e=>{
-            console.log("err: ",e)
+            console.error("err: ",e)
         })
     }
 

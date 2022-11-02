@@ -1,4 +1,4 @@
-import React,{useEffect, useState, useRef, useCallback} from "react";
+import React,{useEffect, useState, useRef } from "react";
 import { useParams, useLocation,Link, useNavigate } from "react-router-dom";
 
 import Return from "../../assets/return.svg"
@@ -23,7 +23,6 @@ const Room = () =>{
     const [chatOn,setChatOn]= useState("chat-not-visible")
     const [settings, setSettings] = useState({})
     const [gameOn,setGameOn] = useState(0)
-    const [gameStarted,setGameStarted] = useState(false)
 
     const [kickPlayer,setKickPlayer] = useState("")
     const [roomOwner,setRoomOwner] = useState("")

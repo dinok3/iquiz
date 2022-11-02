@@ -42,7 +42,6 @@ const fetchQuestions = async (URL, params, setQuestions, setSpin, navigate, shou
         }
     }
     
-    console.log(URL)
     await fetch(URL)
         .then(res=>res.json())
         .then(data=>{
@@ -60,7 +59,7 @@ const fetchQuestions = async (URL, params, setQuestions, setSpin, navigate, shou
         
         })
         .catch(e=>{
-            console.log(e)
+            console.error(e)
         })
     }
 
