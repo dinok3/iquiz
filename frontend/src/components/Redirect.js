@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback,useContext } from "react";
+import React, { useEffect, useState ,useContext } from "react";
 
 import { Route,Routes, useLocation } from "react-router-dom";
 
@@ -28,29 +28,29 @@ const Redirect = ()=>{
 
     const [trivia_categories,setTriviaCategories] = useState([])
 
-    const fetchCategories = useCallback(async ()=>{
-        await fetch("https://opentdb.com/api_category.php")
-        .then(res=>res.json())
-        .then(data=>{
-            setTriviaCategories(data.trivia_categories)
-        })
-        .catch(e=>{
-            console.log("API categories error: ",e)
-        })
-       
+    
+    useEffect(()=>{
+        
+        const fetchCategories = async ()=>{
+            await fetch("https://opentdb.com/api_category.php")
+            .then(res=>res.json())
+            .then(data=>{
+                setTriviaCategories(data.trivia_categories)
+            })
+            .catch(e=>{
+                console.log("API categories error: ",e)
+            })
+           
+        }
+        fetchCategories()
     },[])
 
-    useEffect(()=>{
-      
-        fetchCategories()
-    },[fetchCategories])
-
-
-    
+  
 
     useEffect(()=>{
         //on first load refresh because interval doesnt work when app is closed
         if(loading){
+            console.log("refreshing...")
            refreshToken()
         }
         

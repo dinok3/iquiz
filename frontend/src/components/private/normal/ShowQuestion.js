@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import GameOver from "./GameOver";
 import { useTimer } from 'use-timer';
@@ -20,11 +20,10 @@ const ShowQuestion = ({questions, websocket, normalGame,timer})=>{
    
     const navigate = useNavigate()
 
-    const { time, start } = useTimer({
+    const { time, start, reset } = useTimer({
         initialTime:5,
+        endTime:0,
         timerType: 'DECREMENTAL',
-        endTime:0
-
     }); 
 
 
@@ -37,11 +36,11 @@ const ShowQuestion = ({questions, websocket, normalGame,timer})=>{
         return new_element.innerHTML
     }
 
-    const nextQuestion = () => {
+    const nextQuestion = useCallback(() => {
         onQuestion + 1 < questions.length ? setOnQuestion(curr=> curr+1) : setGameOver(true)
         setClicked(false)
         setAnimate("fadeIn")
-    }
+    },[questions.length, onQuestion])
 
     const clearCorrectIncorrect = () => {
         const choices = Array.from(document.getElementsByClassName("answer-choice"))
@@ -74,8 +73,8 @@ const ShowQuestion = ({questions, websocket, normalGame,timer})=>{
 
         e.target.classList.add(class_to_add)
 
-        if(!normalGame) return;
 
+        if(!normalGame) return;
 
         setTimeout(()=>{   
             //show new question after 1.5s of pause
@@ -94,15 +93,12 @@ const ShowQuestion = ({questions, websocket, normalGame,timer})=>{
     useEffect(()=>{
         if(!normalGame){
             if(time === 0){
-                //next question and remove all UI for correct and wrong answer
-                onQuestion + 1 < questions.length ? setOnQuestion(curr=> curr+1) : setGameOver(true)
-                setClicked(false)
-                setAnimate("fadeIn")
-    
                 clearCorrectIncorrect()
+                nextQuestion()
+                reset()
             }
         }
-    },[time, onQuestion, questions, normalGame])
+    },[normalGame, time, reset, nextQuestion])
 
 
     useEffect(()=>{

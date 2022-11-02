@@ -33,17 +33,17 @@ export const AuthProvider = ({children})=>{
         localStorage.setItem("user",jwt_decode(data.access).username)
     }
 
-    const handleSocialResponse = (data,user)=>{  
-        var new_data = {
-            access: data.access_token,
-            refresh: data.refresh_token
-        }
-        new_data = JSON.stringify(new_data)
-        
-        if(new_data !== "{}"){
+    const handleSocialResponse = (data, user_name)=>{  
+        if(data.access_token){
+            var new_data = JSON.stringify({
+                access: data.access_token,
+                refresh: data.refresh_token
+            })
+           
             setResponseTokens(new_data)
             localStorage.setItem("authTokens",new_data)
-            localStorage.setItem("user",user)
+            localStorage.setItem("user",user_name)
+            
         }
         !localStorage.getItem("authTokens") && navigate("/")                   
     }
@@ -116,7 +116,7 @@ export const AuthProvider = ({children})=>{
 
     const refresh_jwt = async (tokens)=>{
         await fetch("http://127.0.0.1:8000/api/token/refresh/",{
-            method:"POST",
+            method:"POST",  
             headers:{
                 "Content-Type":"application/json"
             },
@@ -136,7 +136,6 @@ export const AuthProvider = ({children})=>{
     }
 
     const refresh_socialToken = async (tokens) =>{
-        
         await fetch("http://127.0.0.1:8000/auth/token",{
             method:"POST",
             headers:{
@@ -151,7 +150,7 @@ export const AuthProvider = ({children})=>{
             })
         .then(res=>res.json())
         .then(data=>{    
-            handleSocialResponse(data,user)
+            handleSocialResponse(data,localStorage.getItem("user"))
         })
         .catch(e=>{
             //logoutUser()
@@ -161,13 +160,16 @@ export const AuthProvider = ({children})=>{
 
     const refreshToken = () => {
         var authTokens = JSON.parse(localStorage.getItem("authTokens")) 
-        
-        authTokens.refresh.length > 50 ? refresh_jwt(authTokens) : refresh_socialToken(authTokens)   
+
+        if(authTokens.refresh.length > 50){
+            refresh_jwt(authTokens)
+        }else{
+            refresh_socialToken(authTokens) 
+        } 
         loading && setLoading(false)  
     }
 
     const responseGoogle = async (googleResponse) =>{
-        console.log(googleResponse)
         await fetch("http://127.0.0.1:8000/auth/convert-token",{
             method:"POST",
             headers:{
@@ -185,7 +187,6 @@ export const AuthProvider = ({children})=>{
             return res.json()
         })
         .then(data =>{
-            console.log(data)
             handleSocialResponse(data,googleResponse.profileObj.name)
             setUser(googleResponse.profileObj.name)
         })
@@ -198,7 +199,6 @@ export const AuthProvider = ({children})=>{
     const responseFacebook = async (fbresponse) => {
         // now u send a POST request to auth/convert-token and django will create a user and log him in(return access and refresh token)
        
-        console.log(fbresponse)
         await fetch("http://127.0.0.1:8000/auth/convert-token",{
             method:"POST",
             headers:{

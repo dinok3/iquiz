@@ -59,7 +59,7 @@ const ShowPlayers = ({room_id, setKickPlayer, settings})=>{
                 {users.map(user=>{
                     return <p className="mt-1 player" key={user.id}>
                             {user.user}
-                            {(user.user !== settings.owner && localStorage.getItem("user") !== user.user) && 
+                            {(user.user !== settings.owner && localStorage.getItem("user") === settings.owner) && 
                             <img src={Kick} alt="kick" data-user={user.user} className="small-svg" onClick={kickPlayer} />}
                             </p>
                 })}  

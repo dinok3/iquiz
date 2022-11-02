@@ -57,8 +57,9 @@ from rest_framework_simplejwt.tokens  import AccessToken as JWToken
 
 
 @api_view(["GET"])
-@permission_classes((IsAuthenticated, ))
+@permission_classes([IsAuthenticated])
 def get_user(request):
+    print("wtf")
     data = {
         "user":request.user.username
     }

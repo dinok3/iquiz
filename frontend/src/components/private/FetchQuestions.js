@@ -42,13 +42,15 @@ const fetchQuestions = async (URL, params, setQuestions, setSpin, navigate, shou
         }
     }
     
-
+    console.log(URL)
     await fetch(URL)
         .then(res=>res.json())
         .then(data=>{
             if(data.response_code !== 0){
                 if(shouldNavigate){
                     navigate("/normal/")
+                }else{
+                    navigate(-1)
                 }
             }
             if(data.results.length > 0){

@@ -59,22 +59,22 @@ const Room = () =>{
         })
     }
 
-    const checkIfGameAlreadyStarted = useCallback(async () => {
-        await fetch(`http://127.0.0.1:8000/api/room/${room_id}/`)
-        .then(res=>res.json())
-        .then(data =>{
-           if(data.is_started){
-                navigate("/custom/")
-                return;
-           }
-        
-        })
-
-    },[room_id,navigate])
-
-
+    
+    
     useEffect(()=>{
-
+        
+        const checkIfGameAlreadyStarted = async () => {
+            await fetch(`http://127.0.0.1:8000/api/room/${room_id}/`)
+            .then(res=>res.json())
+            .then(data =>{
+               if(data.is_started){
+                    navigate("/custom/")
+                    return;
+               }
+            
+            })
+    
+        }
         checkIfGameAlreadyStarted()
 
         ws.current = new WebSocket(`ws://127.0.0.1:8000/ws/${room_id}/?token=${localStorage.getItem("user")}`)
@@ -94,7 +94,7 @@ const Room = () =>{
         }
         
      
-    },[connecting, room_id, checkIfGameAlreadyStarted])
+    },[connecting, room_id, navigate])
 
     useEffect(()=>{
         /*
