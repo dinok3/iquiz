@@ -216,6 +216,7 @@
   max-width: 55rem;
   width: 100%;
 }
+
 .player{
   display: flex;
   justify-content: space-between;

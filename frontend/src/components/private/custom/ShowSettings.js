@@ -1,6 +1,6 @@
 import React,{useEffect} from "react";
 import { useNavigate } from "react-router-dom";
-
+import NFSettings from "../../assets/UnfilledSettings.svg"
 
 const ShowSettings = ({room_id, setRoomOwner,setSettings, settings})=>{
     const navigate = useNavigate()
@@ -29,8 +29,10 @@ const ShowSettings = ({room_id, setRoomOwner,setSettings, settings})=>{
             <span className="small-spinner mt-1"></span>
         :
             <section className="players mt-3">
-                <h3>SETTINGS: </h3>
-                <hr></hr>
+                <h3 style={{display:"flex",justifyContent:"space-between"}}>
+                    SETTINGS: <img src={NFSettings} alt="settings.svg" className="small-svg" /> 
+                </h3>
+                <hr />
                 <p className="mt-1 player"><span className="bold">OWNER: </span>{settings.owner}</p>
                 <p className="mt-1 player"><span className="bold">CATEGORY:  </span> {settings.category}</p>
                 <p className="mt-1 player"><span className="bold">DIFFICULTY: </span> {settings.difficulty}</p>

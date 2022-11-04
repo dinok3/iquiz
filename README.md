@@ -14,7 +14,7 @@ Quiz app made with Django + React.
 * Correct and Incorrect answers are shown the moment you click on the answer
 * Solo (normal) or Group game (custom)
 * Creating your own room
-* Room owner has ability to change settings, kick players
+* Room owner has ability to kick players
 * Room chat
 * Kick player via chat /kickplayer '[name]' or button
 * Time limit for each question in custom game
