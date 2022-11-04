@@ -4,7 +4,7 @@ import fetchQuestions from "../FetchQuestions";
 import ShowQuestion from "../normal/ShowQuestion";
 
 
-const CustomGame = ({gameOn, websocket, settings})=>{
+const CustomGame = ({gameOn, websocket, settings, room_id})=>{
     const navigate = useNavigate()
     const [questions, setQuestions] = useState([])
     const [spin,setSpin] = useState(true)
@@ -46,7 +46,9 @@ const CustomGame = ({gameOn, websocket, settings})=>{
                 if(usersSet){
                     setUserScores(prevScores=>{   
                         var findUser = prevScores.find(e => e.name === user)
-                        findUser.score = score
+                        if(findUser){
+                            findUser.score = score
+                        }
                         return [...prevScores]
                     })
                 }
@@ -64,7 +66,8 @@ const CustomGame = ({gameOn, websocket, settings})=>{
                         questions={questions} 
                         websocket={websocket} 
                         normalGame={false} 
-                        timer={settings.time} />}
+                        timer={settings.time} 
+                        room_id={room_id}/>}
             {usersSet &&
             <div className="scoreboard-section">
                 <h2>Scoreboard</h2>

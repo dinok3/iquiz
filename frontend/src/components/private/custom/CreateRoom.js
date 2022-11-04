@@ -88,8 +88,12 @@ const CreateRoom = ({trivia_categories, difficulties, types})=>{
             <button type="submit" className="btn submit-btn mt-2">Create</button>
 
         </form>
-    
 
+        <p>
+            <span className="bold">Note: </span> Some categories have limited questions. Because of that u may not
+            be able to start a game.
+        </p>
+    
         </>
     )
 }

@@ -18,6 +18,7 @@ Quiz app made with Django + React.
 * Room chat
 * Kick player via chat /kickplayer '[name]' or button
 * Time limit for each question in custom game
+* Deleting rooms where there are no players & only owners can prevent that from happening by joining it
 
 
 ## Working on

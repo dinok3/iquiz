@@ -35,9 +35,7 @@ const Home = ()=>{
         <Link to="/stats/" className="btn middle-link mt-2">YOUR STATS</Link>
     </section>
     
-    <p className="contribute-msg">If you have a good quiz question, 
-        <Link to="" className="footer-a"> click here </Link> 
-        to submit it and if its approved it will be added to a database!</p>
+    
     </>
     )
 }

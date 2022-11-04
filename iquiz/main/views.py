@@ -1,3 +1,4 @@
+import constantly
 from django.contrib.auth.models import User
 from .models import Room,Profile
 from .serializers import RoomSerializer, ProfileSerizaliter
@@ -41,7 +42,7 @@ def create_room_view(request):
 
 
 @permission_classes([IsAuthenticated])
-@api_view(["GET","POST"])
+@api_view(["GET","POST", "DELETE"])
 def room_view(request,id):
     room = Room.objects.get(id=id)
     
@@ -66,6 +67,12 @@ def room_view(request,id):
         
             serializer = RoomSerializer(room)
             return Response(serializer.data)
+    
+    if request.method == "DELETE":
+        print("deleting...")
+        room.delete()
+        return Response("Room is Deleted")    
+    
 
 
 @permission_classes([IsAuthenticated])

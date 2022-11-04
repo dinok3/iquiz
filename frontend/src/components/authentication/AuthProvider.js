@@ -153,8 +153,8 @@ export const AuthProvider = ({children})=>{
             handleSocialResponse(data,localStorage.getItem("user"))
         })
         .catch(e=>{
-            //logoutUser()
             console.log("refresh doesnt work")
+            //logoutUser()
             })
     }
 

@@ -6,7 +6,7 @@ import { useTimer } from 'use-timer';
 import Return from "../../assets/return.svg"
 
 
-const ShowQuestion = ({questions, websocket, normalGame,timer})=>{
+const ShowQuestion = ({questions, websocket, normalGame, timer, room_id})=>{
     const [onQuestion,setOnQuestion] = useState(0)
     const [currentQuestion,setCurrentQuestion] = useState({})
     const [correctAnswer,setCorrectAnswer] = useState("")
@@ -21,18 +21,18 @@ const ShowQuestion = ({questions, websocket, normalGame,timer})=>{
     const navigate = useNavigate()
 
     const { time, start, reset } = useTimer({
-        initialTime:5,
+        initialTime:timer,
         endTime:0,
         timerType: 'DECREMENTAL',
     }); 
 
 
-    const decodeQuestionText = (string) =>{
+    const decodeQuestionText = (question) =>{
         //"Which famous book is sub-titled &#039;The Modern Prometheus&#039;?" 
         //to
         //"Which famous book is sub-titled 'The Modern Prometheus'?" 
         const new_element = document.createElement("div")
-        new_element.innerHTML = string
+        new_element.innerHTML = question
         return new_element.innerHTML
     }
 
@@ -60,7 +60,7 @@ const ShowQuestion = ({questions, websocket, normalGame,timer})=>{
         
         var class_to_add = ""
         
-        if(e.target.value === correctAnswer){
+        if(e.target.value === decodeQuestionText(correctAnswer)){
             setScore(prev=>prev+10)
             class_to_add = "correct_answer"
                 
@@ -131,7 +131,11 @@ const ShowQuestion = ({questions, websocket, normalGame,timer})=>{
 
     return (
         <div className="game-container">
-            {gameOver ?  <GameOver endscore={score} max_score={questions.length*10} /> :
+            
+            {gameOver ?  <GameOver  endscore={score} 
+                                    max_score={questions.length*10} 
+                                    room_id={room_id} /> :
+            
             <div className={`${animate}`}>
             
                 <h1>{decodeQuestionText(currentQuestion.question)}</h1>

@@ -131,7 +131,7 @@ class RoomConsumer(AsyncWebsocketConsumer):
         user = event["user"]
         
     
-        if message == "/newuserjoined":
+        if message == "/NewUserJoined":
             await self.send(text_data=json.dumps({
                 "message": str(user) + " has joined the server"
             }))

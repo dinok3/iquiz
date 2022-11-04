@@ -74,6 +74,7 @@ const Room = () =>{
             })
     
         }
+        
         checkIfGameAlreadyStarted()
 
         ws.current = new WebSocket(`ws://127.0.0.1:8000/ws/${room_id}/?token=${localStorage.getItem("user")}`)
@@ -110,7 +111,7 @@ const Room = () =>{
         if(ws.current){
             ws.current.onmessage = (e)=>{
                 const new_message = JSON.parse(e.data) 
-
+                
                 var message = new_message["message"]
 
                 if(message.includes("/kickplayer")){
@@ -224,7 +225,7 @@ const Room = () =>{
                 </div>
             </div>
 
-            <CustomGame gameOn={gameOn} websocket={ws} settings={settings} />
+            <CustomGame gameOn={gameOn} websocket={ws} settings={settings} room_id={room_id} />
 
         </div>
     }

@@ -15,20 +15,19 @@ const fetchQuestions = async (URL, params, setQuestions, setSpin, navigate, shou
     shouldNavigate = false -> custom game
 
     */
-    var category = ""
-
-    if(shouldNavigate){
-        category = params.category
-    }else{
-        category = await categoryNameToId(params.category)
-    }
-    
+    var category = params.category
     var difficulty = params.difficulty.toLowerCase()
     var type = params.type.toLowerCase()
 
-    if(category !== "any"){
+    if(category.toLowerCase() !== "any"){
+        if(shouldNavigate){
+            category = params.category
+        }else{
+            category = await categoryNameToId(params.category)
+        }
         URL += `&category=${category}`
     }
+    
     if(difficulty !== "any"){
         URL += `&difficulty=${difficulty}`
     }
