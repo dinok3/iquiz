@@ -9,10 +9,7 @@ const deleteRoom = async (room_id) =>{
             "Authorization":`Bearer ${JSON.parse(localStorage.getItem("authTokens")).access}`
         }
     })
-    .then(res=>res.json())
-    .then(data=>{
-        console.log(data)
-    })
+
 }
 
 const checkIfRoomHasPlayers = async (room_id, setErrorMessage) =>{

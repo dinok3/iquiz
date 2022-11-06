@@ -37,7 +37,7 @@ const ShowSettings = ({room_id, setRoomOwner,setSettings, settings})=>{
                 <p className="mt-1 player"><span className="bold">CATEGORY:  </span> {settings.category}</p>
                 <p className="mt-1 player"><span className="bold">DIFFICULTY: </span> {settings.difficulty}</p>
                 <p className="mt-1 player"><span className="bold">TYPE: </span> {settings.type}</p>
-                <p className="mt-1 player"><span className="bold">TIME: </span> {settings.time}sec</p>
+                <p className="mt-1 player"><span className="bold">TIME: </span> {settings.time} sec</p>
                 <p className="mt-1 player"><span className="bold">ROUNDS: </span> {settings.rounds}</p>
             
             </section>
